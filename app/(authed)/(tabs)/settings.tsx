@@ -1,8 +1,13 @@
-import { Text, View } from "react-native";
-export default function Settings() {
+import { useAuth } from '@/context/AuthContext';
+import { VStack } from '@/components/VStack';
+import  Button  from '@/components/Button';
+
+export default function SettingsScreen() {
+  const { logout } = useAuth();
+
   return (
-    <View>
-      <Text>Settings</Text>
-    </View>
+    <VStack flex={1} m={20}>
+      <Button onPress={logout}>Logout</Button>
+    </VStack>
   );
 }
