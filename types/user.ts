@@ -8,9 +8,9 @@ export enum UserRole {
 export type AuthResponse = APIResponse<{ token: string; user: User }>;
 
 export type User = {
-  id: number;
+	id: number;
 	email: string;
-  role: UserRole;
-	createdAt: string;
-	updatedAt: string;
+	role: UserRole;
+	created_at: string;
+	updated_at: string;
 }

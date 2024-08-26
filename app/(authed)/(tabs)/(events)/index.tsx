@@ -7,6 +7,7 @@ import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { useAuth } from '@/context/AuthContext';
 import { useOnScreenFocusCallback } from '@/hooks/useOnScreenFocusCallback';
 import { eventService } from '@/services/event';
+import { ticketService } from '@/services/tickets';
 import { Event } from '@/types/event';
 import { UserRole } from '@/types/user';
 import { useFocusEffect } from '@react-navigation/native';
@@ -28,13 +29,13 @@ export default function EventsScreen() {
   }
 
   async function buyTicket(id: number) {
-    // try {
-    //   await ticketService.createOne(id);
-    //   Alert.alert("Success", "Ticket purchased successfully");
-    //   fetchEvents();
-    // } catch (error) {
-    //   Alert.alert("Error", "Failed to buy ticket");
-    // }
+    try {
+      await ticketService.createOne(id);
+      Alert.alert("Success", "Ticket purchased successfully");
+      fetchEvents();
+    } catch (error) {
+      Alert.alert("Error", "Failed to buy ticket");
+    }
   }
 
   const fetchEvents = async () => {

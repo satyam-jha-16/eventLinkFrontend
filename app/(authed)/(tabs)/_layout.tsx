@@ -28,7 +28,7 @@ export default function TabLayout() {
       },
     },
     {
-      showFor: [UserRole.Attendee, UserRole.Manager],
+      showFor: [UserRole.Manager],
       name: "scan-ticket",
       displayName: "Scan Ticket",
       icon: "scan",
@@ -37,7 +37,7 @@ export default function TabLayout() {
       },
     },
     {
-      showFor: [UserRole.Manager],
+      showFor: [UserRole.Attendee, UserRole.Manager],
       name: "settings",
       displayName: "Settings",
       icon: "cog",
@@ -58,7 +58,7 @@ export default function TabLayout() {
             headerTitle: tab.displayName,
             href: tab.showFor.includes(user?.role!) ? tab.name as Href : null,
             tabBarLabel: ({ focused }) => (
-              <Text style={{ color: focused ? "black" : "gray", fontSize: 14, padding: 4 }}>
+              <Text style={{ color: focused ? "black" : "gray", fontSize: 14, padding: 1 }}>
                 {tab.displayName}
               </Text>
             ),
