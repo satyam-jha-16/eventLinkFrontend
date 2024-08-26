@@ -6,9 +6,11 @@ import Password from "@/components/Password";
 import { Text } from "@/components/Text";
 import { VStack } from "@/components/VStack";
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
+import { useAuth } from "@/context/AuthContext";
 import React, { useState } from "react";
 import { Image, KeyboardAvoidingView, ScrollView } from "react-native";
 const Login = () => {
+  const { authenticate, isLoadingAuth } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [authMode, setAuthMode] = useState<"login" | "register">("login");
@@ -16,6 +18,11 @@ const Login = () => {
   const onToggleAuthMode = () => {
     setAuthMode((prev) => (prev === "login" ? "register" : "login"));
   };
+
+  async function onAuthenticate() {
+    // console.log("authenticating", authMode, email, password);
+    await authenticate(authMode, email, password);
+  }
   return (
     <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ flex: 1 }}>
@@ -74,8 +81,8 @@ const Login = () => {
             <Button
               h={48}
               p={14}
-              isLoading={false} //TODO : From Auth Provider
-              onPress={() => {}} // TODO : From Auth Provider
+              isLoading={isLoadingAuth}
+              onPress={onAuthenticate}
             >
               {authMode === "login" ? "Login" : "Register"}
             </Button>
